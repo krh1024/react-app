@@ -1,7 +1,7 @@
 function Potato() {
     return (
         <div>
-            <h3>potato</h3>
+            <h3>potato is good</h3>
         </div>
     );
 }

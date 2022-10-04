@@ -3,7 +3,7 @@ import Potato from "./components/Potato";
 function App() {
     return (
         <main className="App">
-            <Potato /> 
+            <Potato />
         </main>
     );
 }
