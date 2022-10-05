@@ -5,7 +5,7 @@ function Movie({id, year,title,summary, poster}) {
     return (
         <article>
             <h4>{title}</h4>
-            <img src={poster}></img>
+            <img src={poster} alt={title}></img>
         </article>
     );
 }

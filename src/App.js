@@ -25,9 +25,24 @@ class App extends React.Component {
         const { isLoading, movies } = this.state;
         return (
             <React.StrictMode>
-                <main>{ isLoading ? "Loading" : movies.map(movie => (
-                    <Movie key={movie.id} id={movie.id} year={movie.year} title={movie.title} summary={movie.summary} poster={movie.medium_cover_image} />
-                )) }</main>
+                <main>
+                    { isLoading ? (
+                        <div class="loader">
+                            <span className="loader__text">Loading...</span>
+                        </div>
+                    )
+                     : (
+                        <div class="movies">
+                            {
+                                movies.map(movie => (
+                                    <Movie key={movie.id} id={movie.id} year={movie.year} title={movie.title} summary={movie.summary} poster={movie.medium_cover_image} />
+                                    )
+                                )
+                            }
+                        </div>
+                    )
+                    }
+                </main>
             </React.StrictMode>
         );
     }
