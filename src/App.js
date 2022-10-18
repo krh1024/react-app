@@ -1,51 +1,30 @@
-import React from "react";
-import axios from "axios";
-import Movie from "./components/Movie";
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 
-class App extends React.Component {
-    state = {
-        isLoading: true,
-        movies: []
-    }
-    
-    getMovie = async () => {
-        const {
-            data: {
-                data: { movies }
-            }
-        } = await axios.get("https://yts.mx/api/v2/list_movies.json?sort_by=rating");
-        this.setState({movies, isLoading: false});
-    }
+import Header from "./components/Header";
+import DayList from "./components/DayList";
+import Day from "./components/Day";
+import EmptyPage from './components/EmptyPage';
 
-    componentDidMount() {
-        this.getMovie();
-    }
+export default function App() {
 
-    render() {
-        const { isLoading, movies } = this.state;
-        return (
-            <React.StrictMode>
-                <main>
-                    { isLoading ? (
-                        <div class="loader">
-                            <span className="loader__text">Loading...</span>
-                        </div>
-                    )
-                     : (
-                        <div class="movies">
-                            {
-                                movies.map(movie => (
-                                    <Movie key={movie.id} id={movie.id} year={movie.year} title={movie.title} summary={movie.summary} poster={movie.medium_cover_image} />
-                                    )
-                                )
-                            }
-                        </div>
-                    )
-                    }
-                </main>
-            </React.StrictMode>
-        );
-    }
+    const [uri, setUri] = useState("/");
+
+
+
+    return (
+     <BrowserRouter>
+        <div className="App">
+            <Header />
+            <Routes>
+                <Route exact path="/" element={ <DayList /> }/>
+                <Route exact path="/day/:day" element={ <Day /> } />
+                
+                {/* 반드시 [*]별 라우팅은 없는 페이지 또는 에러페이지로 맨 아래에 위치해야 한다.
+                    맨 위에 두면 전부 EmptyPage 컴포넌트로 이동되어버린다. */}
+                <Route exact path="*" element={ <EmptyPage /> } />
+            </Routes>
+        </div>
+    </BrowserRouter>
+    );
 }
-
-export default App;
