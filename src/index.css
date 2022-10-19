@@ -47,6 +47,7 @@ a {
   background-color: #efefef;
   font-weight: bold;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .list_day {
